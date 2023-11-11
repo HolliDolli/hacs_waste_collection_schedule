@@ -68,7 +68,9 @@ class Source:
         soup = BeautifulSoup(r.text, features="html.parser")
         for option in soup.find("select", {"name": "ak_bezirk"}).find_all("option"):
             if option.text.lower() == self._bezirk.lower():
-                self._bezirk = option.get("value")
+                # removing this line solves Issue 1401.
+                # i see no use in this line, so it can hopefully removed without other consequences.
+                #self._bezirk = option.get("value")
                 bezirk_id = option.get("value")
                 break
 
